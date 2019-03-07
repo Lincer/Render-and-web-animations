@@ -1,0 +1,68 @@
+/**
+    CoreCamp shower theme created by Pavel Navalnyi (lincerone@gmail.com)
+ */
+
+/* Variables */
+.shower {
+    --light-slide-color: #0E193E;
+    --dark-slide-color: white;
+
+    --heading-font-size: 60px;
+    --body-font-size: 25px;
+
+    --progress-color: #0E193E;
+}
+
+/* Slides */
+.slide {
+    padding: 20px 100px 0;
+}
+
+/* Typography */
+.slide p {
+    font: normal var(--body-font-size)/2 'Helvetica Neue', serif;
+}
+.slide h2 {
+    font: bold var(--heading-font-size) 'Helvetica Neue', serif;
+}
+.slide.black {
+    color: var(--dark-slide-color);
+    background-color: #0e193e;
+}
+.slide h2,
+.slide li::before,
+.slide p.note {
+    color: var(--light-slide-color);
+}
+.slide.black h2,
+.slide.black li::before,
+.slide.black p.note {
+    color: var(--dark-slide-color);
+}
+
+/* Shout */
+.slide .shout {
+    font-size: 90px;
+}
+
+
+/* Number */
+.slide::after {
+    top: auto;
+    bottom: 0;
+    left: auto;
+    right: 40px;
+    color: var(--light-slide-color);
+    background-image: none;
+}
+.slide.black::after {
+    color: var(--dark-slide-color)
+}
+.slide.no-number::after {
+    visibility: hidden;
+}
+
+/* Progress */
+.progress::before {
+    background: var(--progress-color);
+}
