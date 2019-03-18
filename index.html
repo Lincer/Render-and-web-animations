@@ -9,7 +9,36 @@
     <link rel="stylesheet" href="theme/corecamp.css">
     <style>
         .shower {
-            --slide-ratio: calc(16 / 9);
+            --slide-ratio: calc(16 / 10);
+        }
+
+        .key {
+            position: absolute;
+            right: 80px;
+            top: 20px;
+            width: 40px;
+        }
+
+        .example1-pic {
+            padding-top: 100px;
+        }
+        .example1-pic img {
+            width: 200px;
+            transition: margin 1s ease-in-out;
+        }
+        .example1-pic:hover img {
+            margin-top: 50%;
+        }
+
+        .example2-pic {
+            padding-top: 100px;
+        }
+        .example2-pic img {
+            width: 200px;
+            transition: transform 1s ease-in-out;
+        }
+        .example2-pic:hover img {
+            transform: translateY(100px);
         }
     </style>
 </head>
@@ -49,31 +78,29 @@
     </section>
 
     <section class="slide no-number">
-        <div class="loader"></div>
+        <div class="spinner"></div>
 
         <style>
-            .loader,
-            .loader:after {
+            .spinner,
+            .spinner:after {
                 border-radius: 50%;
                 width: 10em;
                 height: 10em;
             }
-            .loader {
+            .spinner {
                 margin: 220px auto 0;
                 font-size: 10px;
                 border-top: 1.1em solid rgba(14,25,62, 0.2);
                 border-right: 1.1em solid rgba(14,25,62, 0.2);
                 border-bottom: 1.1em solid rgba(14,25,62, 0.2);
                 border-left: 1.1em solid #0E193E;
-                animation: loading 1.1s infinite linear;
+                animation: spinning 1.1s infinite linear;
             }
-            @keyframes loading {
+            @keyframes spinning {
                 0% {
-                    -webkit-transform: rotate(0deg);
                     transform: rotate(0deg);
                 }
                 100% {
-                    -webkit-transform: rotate(360deg);
                     transform: rotate(360deg);
                 }
             }
@@ -85,8 +112,8 @@
         <h2 class="shout grow">I hate spinners</h2>
     </section>
 
-    <section class="slide">
-        <img class="cover " src="pictures/performance-tab1.png" alt="Performance tab screenshot">
+    <section class="slide no-number">
+        <img class="cover" src="pictures/performance-tab.png" alt="Performance tab screenshot">
     </section>
 
     <section class="slide">
@@ -94,160 +121,553 @@
     </section>
 
     <section class="slide">
-        <h2>Rendering pipeline</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At consectetur, deleniti eaque error esse excepturi expedita magni molestias, non nulla odio omnis quasi quidem quis quisquam quo repellat, voluptates voluptatibus!</p>
+        <h2>Pipeline overview</h2>
+        <img class="cover" width="850" src="pictures/pipeline_full.svg" alt="Full pipeline">
     </section>
 
-    <!--<section class="slide no-number">-->
-        <!--<iframe class="cover" src="https://www.tomswholesomefood.com.au/" frameborder="0" width="100%" height="100%"></iframe>-->
+    <!--<section class="slide">-->
+        <!--<h2>Pipeline overview</h2>-->
+        <!--<img id="pipeline-image-stages" class="cover" width="850" src="pictures/pipeline_full_stages.svg" alt="Full pipeline with stages">-->
+        <!--<style>-->
+            <!--#pipeline-image-stages {-->
+                <!--padding-top: 99px;-->
+                <!--margin-left: -3px;-->
+            <!--}-->
+        <!--</style>-->
     <!--</section>-->
-    
+
     <section class="slide">
-        <h2>Shower key features</h2>
-        <ol>
-            <li>Built on HTML, CSS and JavaScript</li>
-            <li>Works in all modern browsers</li>
-            <li>Themes are separated from engine</li>
-            <li>Fully keyboard accessible</li>
-            <li>Printable to PDF</li>
-        </ol>
-        <p class="note">Shower ['ʃəuə] noun. A person or thing that shows.</p>
+        <h2>Frame pipeline</h2>
+        <img class="cover" width="850" src="pictures/pipeline_detailed.svg" alt="Detailed render pipeline">
+        <img class="cover next" style="margin-top: 100px;" width="850" src="pictures/time_frame.svg" alt="Frame timeline">
     </section>
 
     <section class="slide">
-        <h2>Plain text on your slides</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur <a href="#4">adipisicing</a> elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, <em>quis nostrud</em> exercitation ullamco laboris <strong>nisi ut aliquip</strong> ex ea commodo consequat. Duis aute irure <i>dolor</i> in reprehenderit in voluptate velit esse cillum <b>dolore</b> eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in <code>&lt;culpa&gt;</code> qui officia deserunt mollit anim id est laborum.</p>
-    </section>
-
-    <section class="slide">
-        <h2>Two columns if you like</h2>
+        <h2>Tree changes</h2>
+        <img class="pipeline" width="850" src="pictures/pipeline_detailed.svg" alt="Detailed render pipeline">
+        <div class="pointer-wrapper">
+            <div class="pointer"></div>
+        </div>
         <div class="columns two">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
-            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.</p>
+            <div>
+                <b>Browser does:</b>
+                <ul>
+                    <li>Detects changes</li>
+                    <li>Starts styles calculation</li>
+                </ul>
+            </div>
+            <div class="next">
+                <b>Triggered by:</b>
+                <ul>
+                    <li>JavaScript (DOM manipulations)</li>
+                    <li>Browser events (scroll, resize)</li>
+                    <li>CSS (:hover, animations)</li>
+                    <li>Any other visual changes</li>
+                </ul>
+            </div>
+        </div>
+
+        <style>
+            .pointer-wrapper {
+                width: 20%;
+                margin-bottom: 20px;
+            }
+            .pointer {
+                width: 0;
+                height: 0;
+                margin: 0 auto;
+                border-style: solid;
+                border-width: 0 15px 15px 15px;
+                border-color: transparent transparent #0e193e transparent;
+            }
+        </style>
+    </section>
+
+    <section class="slide styles">
+        <h2>Styles calculation</h2>
+        <img class="pipeline" width="850" src="pictures/pipeline_detailed.svg" alt="Detailed render pipeline">
+        <div class="pointer-wrapper">
+            <div class="pointer"></div>
+        </div>
+        <div class="columns two">
+            <div>
+                <b>Browser does:</b>
+                <ul>
+                    <li>Resolving selectors and specificity</li>
+                    <li>Media queries</li>
+                    <li>JS event handlers</li>
+                    <li>Finalizes styles for every element</li>
+                </ul>
+            </div>
+            <div class="next">
+                <b>Triggered by:</b>
+                <ul>
+                    <li>Automatically</li>
+                </ul>
+            </div>
+        </div>
+
+        <style>
+            .styles .pointer-wrapper {
+                margin-left: 23%;
+            }
+        </style>
+    </section>
+
+    <section class="slide layout">
+        <h2>Layout creation</h2>
+        <img class="pipeline" width="850" src="pictures/pipeline_detailed.svg" alt="Detailed render pipeline">
+        <div class="pointer-wrapper">
+            <div class="pointer"></div>
+        </div>
+
+        <img class="key" src="pictures/key.svg" alt="Key icon">
+
+        <div class="columns two">
+            <div>
+                <b>Browser does:</b>
+                <ul>
+                    <li>Measures all of the sizes</li>
+                    <li>Calculates position for all blocks</li>
+                    <li>Builds page layout (backbone)</li>
+                </ul>
+            </div>
+            <div class="next">
+                <b>Triggered by:</b>
+                <ul>
+                    <li class="next">All size related DOM changes</li>
+                    <li class="next">All size related DOM queries</li>
+                    <li class="next"><mark>element.style.width</mark> = x</li>
+                    <li class="next">let w = <mark>element.style.width</mark></li>
+                </ul>
+            </div>
+        </div>
+
+        <style>
+            .layout .pointer-wrapper {
+                margin-left: 43%;
+            }
+        </style>
+    </section>
+
+    <section class="slide paint">
+        <h2>Painting</h2>
+        <img class="pipeline" width="850" src="pictures/pipeline_detailed.svg" alt="Detailed render pipeline">
+        <div class="pointer-wrapper">
+            <div class="pointer"></div>
+        </div>
+        <div class="columns two">
+            <div>
+                <b>Browser does:</b>
+                <ul>
+                    <li>
+                        Paints pixels:
+                        <ul>
+                            <li>Fills colours</li>
+                            <li>Draws text</li>
+                            <li>Rasterizes images</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="next">
+                <b>Triggered by:</b><br>
+                Changing colours (pixels) without any changes to sizes/positions
+            </div>
+        </div>
+
+        <style>
+            .paint .pointer-wrapper {
+                margin-left: 62%;
+            }
+        </style>
+    </section>
+
+    <section class="slide composite">
+        <h2>Composition</h2>
+        <img class="pipeline" width="850" src="pictures/pipeline_detailed.svg" alt="Detailed render pipeline">
+        <div class="pointer-wrapper">
+            <div class="pointer"></div>
+        </div>
+        <div class="columns two">
+            <div>
+                <b>Browser does:</b>
+                <ul>
+                    <li>Handles stacking context</li>
+                    <li>Overflows layers</li>
+                </ul>
+            </div>
+            <div class="next">
+                <b>Triggered by:</b><br>
+                Transforming elements without changing their colors, sizes or position
+            </div>
+        </div>
+
+        <style>
+            .composite .pointer-wrapper {
+                margin-left: 83%;
+            }
+        </style>
+    </section>
+
+    <section class="slide layout">
+        <h2>Layout properties</h2>
+        <img class="pipeline" width="850" src="pictures/pipeline_detailed.svg" alt="Detailed render pipeline">
+        <div class="pointer-wrapper">
+            <div class="pointer"></div>
+        </div>
+        <b>CSS properties:</b>
+        <div class="columns two">
+            <ul>
+                <li>width, height</li>
+                <li>top, right, bottom, right</li>
+                <li>margin, padding</li>
+
+            </ul>
+            <ul>
+                <li>border</li>
+                <li>float, flex</li>
+                <li>...</li>
+            </ul>
+
+        </div>
+    </section>
+
+    <section class="slide paint">
+        <h2>Painting properties</h2>
+        <img class="pipeline" width="850" src="pictures/pipeline_detailed_no_layout.svg" alt="Detailed render pipeline with no layout">
+        <div class="pointer-wrapper">
+            <div class="pointer"></div>
+        </div>
+        <b>CSS properties:</b>
+        <div class="columns two">
+            <ul>
+                <li>color</li>
+                <li>background</li>
+                <li>border-color</li>
+            </ul>
+            <ul>
+                <li>box-shadow, text-shadow</li>
+                <li>&lt;img&gt;</li>
+                <li>...</li>
+            </ul>
+
+        </div>
+    </section>
+
+    <section class="slide composite">
+        <h2>Composition properties</h2>
+        <img class="pipeline" width="850" src="pictures/pipeline_detailed_no_paint.svg" alt="Detailed render pipeline with no paint">
+        <div class="pointer-wrapper">
+            <div class="pointer"></div>
+        </div>
+        <b>CSS properties:</b>
+        <ul>
+            <li>transform: matrix | translate | scale | rotate | skew </li>
+            <li>opacity</li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <h2 class="shout">Demos plz!</h2>
+    </section>
+
+    <section class="slide">
+        <h2 class="shout">Debugging first</h2>
+    </section>
+
+    <section class="slide">
+        <h2>Debugging</h2>
+        <div class="columns two">
+            <img width="400" height="400" src="pictures/devtools.jpg" alt="Chrome DevTools">
+            <ul style="font-size: 30px;">
+                <li>
+                    Rendering tab:
+                    <ul>
+                        <li>Paint flashing</li>
+                        <li>FPS meter</li>
+                    </ul>
+                </li>
+                <li>
+                    Performance tab:
+                    <ul>
+                        <li>CPU throttling</li>
+                        <li>Frames</li>
+                    </ul>
+                </li>
+            </ul>
         </div>
     </section>
 
     <section class="slide">
-        <h2>All kind of lists</h2>
-        <ol>
-            <li>Simple lists are marked with bullets</li>
-            <li>Ordered lists begin with a number</li>
-            <li>You can even nest lists one inside another
-                <ul>
-                    <li>Or mix their types</li>
-                    <li>But do not go too far</li>
-                    <li>Otherwise audience will be bored</li>
+        <h2>Example 1: Margin</h2>
+        <div class="example1 columns three">
+            <div class="example1-pic">
+                <img style="padding-top: 20px;" src="pictures/al.png">
+            </div>
+            <div class="example1-pic">
+                <img src="pictures/fl.png">
+            </div>
+            <div class="example1-pic">
+                <img src="pictures/pl.png">
+            </div>
+        </div>
+    </section>
+
+    <section class="slide">
+        <h2>Example 2: Transform</h2>
+        <div class="example2 columns three">
+            <div class="example2-pic">
+                <img style="padding-top: 20px;" src="pictures/al.png">
+            </div>
+            <div class="example2-pic">
+                <img src="pictures/fl.png">
+            </div>
+            <div class="example2-pic">
+                <img src="pictures/pl.png">
+            </div>
+        </div>
+    </section>
+
+    <section class="slide">
+        <h2 class="shout">
+            transform, opacity<br>
+            > <br>
+            everything else
+        </h2>
+        <img class="key" src="pictures/key.svg" alt="Key icon">
+    </section>
+
+    <section class="slide">
+        <h2 class="shout">Wait!</h2>
+    </section>
+
+    <section class="slide">
+        <img class="cover" src="pictures/wrong_accordion.gif" alt="Accordeon gif">
+    </section>
+
+    <section class="slide">
+        <h2 class="shout">Layers!</h2>
+    </section>
+    
+    <section class="slide">
+        <h2>Layers</h2>
+        <div class="columns two">
+            <img style="margin-top: 20px;" width="350" height="350" src="pictures/layers.png" alt="Chrome DevTools">
+            <div>
+                <ul style="font-size: 26px;">
+                    <li>Created automatically by the browser</li>
+                    <li>Has their own rendering pipeline</li>
+                    <li>Doesn't trigger reflows/repaints on a main layer</li>
+                    <li>Processed on a GPU</li>
+                    <li>They feed on memory 🧛‍♂️</li>
                 </ul>
-            </li>
-            <li>Look, seven rows exactly!</li>
-        </ol>
+            </div>
+        </div>
     </section>
 
     <section class="slide">
-        <h2>Serious citations</h2>
-        <figure>
-            <blockquote>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.</p>
-            </blockquote>
-            <figcaption>Marcus Tullius Cicero</figcaption>
-        </figure>
+        <h2>Layers</h2>
+        <div class="columns two">
+            <img style="margin-top: 20px;" width="350" height="350" src="pictures/layers.png" alt="Chrome DevTools">
+            <div>
+                <strong style="font-size: 30px;">When are they created?</strong>
+                <ul style="font-size: 30px;">
+                    <li>&lt;video&gt;, &lt;canvas&gt;</li>
+                    <li class="next">transform</li>
+                    <li class="next">animated CSS filters</li>
+                    <li class="next">stacking context (z-index)</li>
+                    <li class="next">will-change</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <section class="slide">
+        <h2>will-change</h2>
+        <div class="columns two">
+            <div>
+                <strong>CSS:</strong>
+                <pre>
+<code>.accordion-content {</code>
+<code>    ...</code>
+<code>    <mark>will-change: height;</mark></code>
+<code>}</code>
+        </pre>
+            </div>
+            <div class="next">
+                <img width="128" src="pictures/ie.png" alt="Internet explorer">
+                <img width="200" src="pictures/edge.png" alt="Edge browser">
+            </div>
+        </div>
     </section>
 
     <section class="slide">
-        <h2>Code samples</h2>
+        <h2>will-change</h2>
+        <div class="columns two">
+            <div>
+                <strong>CSS:</strong>
+                <pre>
+<code>.accordion-content {</code>
+<code>    ...</code>
+<code>    <mark>transform: translate3D(0, 0, 0);</mark></code>
+<code>}</code>
+        </pre>
+            </div>
+            <div class="next"><h2>🧛‍♂</h2>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide">
+        <h2>will-change</h2>
+        <strong>CSS:</strong>
         <pre>
-            <code>&lt;!DOCTYPE html&gt;</code>
-            <code class="mark">&lt;html lang="en"&gt;</code>
-            <code><mark>&lt;head&gt;</mark> <span class="comment">&lt;!--Comment--&gt;</span></code>
-            <code>    &lt;title&gt;Shower&lt;/title&gt;</code>
-            <code>    &lt;meta charset="<mark class="important">UTF-8</mark>"&gt;</code>
-            <code>    &lt;link rel="stylesheet" href="screen.css"&gt;</code>
-            <code><mark>&lt;/head&gt;</mark></code>
+<code><mark>.accelerated</mark> {</code>
+<code>    ...</code>
+<code>    will-change: height;</code>
+<code>}</code>
         </pre>
     </section>
 
     <section class="slide">
-        <h2>Even tables</h2>
-        <table>
-        <tr>
-            <th scope="col">Locavore</th>
-            <th>Umami</th>
-            <th>Helvetica</th>
-            <th>Vegan</th>
-        </tr>
-        <tr>
-            <th scope="row">Fingerstache</th>
-            <td>Kale</td>
-            <td>Chips</td>
-            <td>Keytar</td>
-        </tr>
-        <tr>
-            <th scope="row">Sriracha</th>
-            <td>Gluten-free</td>
-            <td>Ennui</td>
-            <td>Keffiyeh</td>
-        </tr>
-        <tr>
-            <th scope="row">Thundercats</th>
-            <td>Jean</td>
-            <td>Shorts</td>
-            <td>Biodiesel</td>
-        </tr>
-        <tr>
-            <th scope="row">Terry</th>
-            <td>Richardson</td>
-            <td>Swag</td>
-            <td>Blog</td>
-        </tr>
-        </table>
-        <p>It’s good to have information organized.</p>
-    </section>
-
-    <section class="slide" id="picture">
-        <h2>Pictures</h2>
-        <figure>
-            <img class="cover" src="pictures/picture.jpg" alt="Orange typewriter on a wooden table close-up">
-            <figcaption class="copyright right white">
-                <a href="http://fiftyfootshadows.net/">© John Carey</a>
-            </figcaption>
-        </figure>
-        <style>
-            #picture h2 {
-                color: white;
-            }
-        </style>
+        <h2 class="shout">Debugging again!</h2>
     </section>
 
     <section class="slide">
-        <h2 class="shout shrink">You can even shout this way</h2>
+        <h2>Debugging</h2>
+        <div class="columns two">
+            <img width="400" height="400" src="pictures/devtools.jpg" alt="Chrome DevTools">
+            <ul style="margin-top: 100px; font-size: 35px;">
+                <li>Layers tab</li>
+                <li>
+                    Rendering tab: Layer borders
+                </li>
+            </ul>
+        </div>
     </section>
 
     <section class="slide">
-        <h2>Inner navigation</h2>
-        <ol>
-            <li>Lets you reveal list items one by one</li>
-            <li class="next">To keep some key points</li>
-            <li class="next">In secret from audience</li>
-            <li class="next">But it will work only once</li>
-            <li class="next">Nobody wants to see the same joke twice</li>
+        <h2>Example 3: will-change</h2>
+        <div class="example2 columns three">
+            <div class="example2-pic">
+                <img style="padding-top: 20px;" src="pictures/al.png">
+            </div>
+            <div class="example2-pic">
+                <img src="pictures/fl.png">
+            </div>
+            <div class="example2-pic">
+                <img src="pictures/pl.png">
+            </div>
+        </div>
+    </section>
+
+    <section class="slide">
+        <h2 class="shout">Wait<sup class="next">2</sup>!</h2>
+    </section>
+
+    <section class="slide">
+        <h2>Next level of complexity</h2>
+        <strong style="font-size: 35px;">More powerful tools:</strong>
+        <ul style="font-size: 35px;">
+            <li class="next">Web Animation API</li>
+            <li class="next">CSS Variables (Custom Properties)</li>
+            <li class="next">Animation libraries (GSAP, etc.)</li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <iframe class="cover" style="height: 100%; width: 100%;" scrolling="no" title="Animation Perf Test" src="//codepen.io/lincer/embed/aMqXJG/?height=265&theme-id=light&default-tab=result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+            See the Pen <a href='https://codepen.io/lincer/pen/aMqXJG/'>Animation Perf Test</a> by Lincer
+            (<a href='https://codepen.io/lincer'>@lincer</a>) on <a href='https://codepen.io'>CodePen</a>.
+        </iframe>
+    </section>
+
+    <section class="slide">
+        <h2>Conclusions</h2>
+        <ol style="font-size: 35px;">
+            <li>Always use <code>transform</code> when possible</li>
+            <li class="next">Use <code>will-change</code> for heavy and constant animations <span class="next">🧛‍♂</span></li>
+            <li class="next">Go for <strong>CSS over JS</strong> if feasible</li>
+            <li class="next">If not, lean towards WAAPI and CSS Var, not direct properties manipulation</li>
         </ol>
+
+        <img class="key" src="pictures/key.svg" alt="Key icon">
     </section>
 
-    <section class="slide" id="see-more">
-        <h2 class="shout">
-            <img src="pictures/logo.svg" alt="Shower logo">
-            <a href="https://github.com/shower/shower">See more on GitHub</a>
-        </h2>
-        <style>
-            #see-more h2 {
-                font-size: 100px
-            }
+    <section class="slide">
+        <h2 class="shout">One more thing</h2>
+    </section>
 
-            #see-more img {
-                width: 0.72em;
-                height: 0.72em;
-            }
-        </style>
+    <section class="slide">
+        <h2 class="shout">Don't do it!</h2>
+    </section>
+
+    <section class="slide">
+        <h2 class="shout">Have a reason</h2>
+    </section>
+
+    <section class="slide">
+        <h2>Reasons to add animation</h2>
+        <ul style="font-size: 35px;">
+            <li>Orientation</li>
+            <li class="next">Attention</li>
+            <li class="next">Feedback</li>
+            <li class="next">Perceived performance</li>
+            <li class="next">Standout 🎉</li>
+        </ul>
+    </section>
+
+    <section class="slide no-number">
+        <iframe class="cover" style="height: 100%; width: 100%;" scrolling="no" title="Password Modal with Finite State Machine" src="//codepen.io/davidkpiano/embed/WKvPBP/?height=265&theme-id=light&default-tab=result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+            See the Pen <a href='https://codepen.io/davidkpiano/pen/WKvPBP/'>Password Modal with Finite State Machine</a> by David Khourshid
+            (<a href='https://codepen.io/davidkpiano'>@davidkpiano</a>) on <a href='https://codepen.io'>CodePen</a>.
+        </iframe>
+    </section>
+
+
+    <section class="slide no-number">
+        <iframe class="cover" src="http://across.global/" frameborder="0" width="100%" height="100%"></iframe>
+    </section>
+
+    <section class="slide no-number">
+        <iframe class="cover" src="https://www.tomswholesomefood.com.au/" frameborder="0" width="100%" height="100%"></iframe>
+    </section>
+
+    <section class="slide no-number">
+        <iframe class="cover" src="http://boroda-digital.orwo.ru/" frameborder="0" width="100%" height="100%"></iframe>
+    </section>
+
+    <section class="slide">
+        <h2>Spinners</h2>
+        <ul style="font-size: 35px;">
+            <li>Don't use it if you <strong>really</strong> need to</li>
+            <li class="next">Make it entertaining</li>
+            <li class="next">Remember <code>async</code></li>
+        </ul>
+
+        <img class="key" src="pictures/key.svg" alt="Key icon">
+    </section>
+
+    <section class="slide">
+        <h2>Additional reading</h2>
+        <strong>Technical:</strong>
+        <ul style="font-size: 20px;">
+            <li><a href="https://developers.google.com/web/fundamentals/performance/rendering/">https://developers.google.com/web/fundamentals/performance/rendering/</a></li>
+            <li><a href="https://www.udacity.com/course/browser-rendering-optimization--ud860">https://www.udacity.com/course/browser-rendering-optimization--ud860</a></li>
+            <li><a href="https://developers.google.com/web/fundamentals/performance/rail">https://developers.google.com/web/fundamentals/performance/rail</a></li>
+        </ul>
+        <strong>Non-technical:</strong>
+        <ul style="font-size: 20px;">
+            <li><a href="https://tympanus.net/codrops/">https://tympanus.net/codrops/</a> (Collective / Playground)</li>
+            <li><a href="https://www.awwwards.com/">https://www.awwwards.com/</a></li>
+            <li><a href="https://codepen.io/">https://codepen.io/</a></li>
+            <li><a href="https://hki.paris/">https://hki.paris/</a></li>
+        </ul>
+    </section>
+
+    <section class="slide no-number">
+        <h2 class="shout">Questions?</h2>
     </section>
 
     <div class="progress"></div>

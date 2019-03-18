@@ -15,7 +15,19 @@
 
 /* Slides */
 .slide {
-    padding: 20px 100px 0;
+    padding: 5px 100px 0;
+}
+.slide::before {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 80px;
+    height: 50px;
+    content: '';
+    background-image: url('../theme/images/corecamp_logo_small_dark.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+
 }
 
 /* Typography */
@@ -23,6 +35,8 @@
     font: normal var(--body-font-size)/2 'Helvetica Neue', serif;
 }
 .slide h2 {
+    margin-top: 0;
+    margin-left: 30px;
     font: bold var(--heading-font-size) 'Helvetica Neue', serif;
 }
 .slide.black {
@@ -42,14 +56,15 @@
 
 /* Shout */
 .slide .shout {
+    margin: 0;
     font-size: 90px;
 }
 
 
 /* Number */
 .slide::after {
-    top: auto;
-    bottom: 0;
+    top: 0;
+    bottom: auto;
     left: auto;
     right: 40px;
     color: var(--light-slide-color);
