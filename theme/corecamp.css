@@ -19,15 +19,17 @@
 }
 .slide::before {
     position: absolute;
-    top: 20px;
-    left: 20px;
+    top: 19px;
+    left: 40px;
     width: 80px;
     height: 50px;
     content: '';
-    background-image: url('../theme/images/corecamp_logo_small_dark.png');
+    background-image: url('../theme/images/cv_logo.png');
     background-size: contain;
     background-repeat: no-repeat;
-
+}
+.slide.no-logo::before {
+    visibility: hidden;
 }
 
 /* Typography */
