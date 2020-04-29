@@ -4,10 +4,9 @@
     <title>Rendering pipeline and web animations performance</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="theme/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <link href="theme/avenga/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
     <link rel="stylesheet" href="node_modules/@shower/ribbon/styles/styles.css">
-    <link rel="stylesheet" href="theme/corecamp.css">
-    <link rel="stylesheet" href="theme/cat.css">
+    <link rel="stylesheet" href="theme/avenga/avenga.css">
     <style>
         .shower {
             --slide-ratio: calc(16 / 10);
@@ -15,8 +14,8 @@
 
         .key {
             position: absolute;
-            right: 80px;
-            top: 20px;
+            right: 75px;
+            bottom: 40px;
             width: 40px;
         }
 
@@ -49,66 +48,39 @@
         <h1>Rendering pipeline and web animations performance</h1>
     </header>
 
-    <section class="slide black no-number no-logo" id="cover">
+    <section class="slide no-number no-logo" id="cover">
+        <img id="logo" width="200" src="/theme/avenga/images/Avenga_logo_L_positive_color.svg" alt="Avenga logo" style="margin: 40px 0 0 -4px;"/>
         <h2>Rendering pipeline and web animations performance</h2>
-        <p>by Pavlo Navalnyi</p>
+        <div id="footer">
+            <p>Pavlo Navalnyi</p>
+        </div>
 
-        <img class="cover width" src="theme/images/corecamp_pattern.png" alt=""/>
         <style>
             #cover h2 {
-                margin: 200px 0 0;
-                color: white;
-                text-align: center;
+                margin: 90px 0 0;
                 font-size: 60px;
                 font-weight: bold;
             }
-
-            #cover p {
+            #footer {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 120px;
+                background: top no-repeat url('/theme/avenga/images/Avenga-wave.png');
+                background-size: contain;
+            }
+            #footer p {
+                position: absolute;
+                width: 100%;
+                bottom: 0;
                 margin: 20px 0 0;
-                text-align: center;
+                padding: 20px 80px;
                 color: white;
-                font-size: 30px;
+                font-size: 20px;
+                background-color: #191a1a;
             }
         </style>
-    </section>
-
-    <section class="slide black no-number no-logo">
-        <div class="cat">
-            <div class="cat__segment"></div>
-            <div class="cat__segment"></div>
-            <div class="cat__segment"></div>
-            <div class="cat__segment"></div>
-            <div class="cat__segment"></div>
-            <div class="cat__segment"></div>
-            <div class="cat__segment"></div>
-            <div class="cat__segment"></div>
-            <div class="cat__segment"></div>
-            <div class="cat__segment"></div>
-            <div class="cat__segment"></div>
-            <div class="cat__segment"></div>
-            <div class="cat__segment"></div>
-            <div class="cat__segment"></div>
-            <div class="cat__segment"></div>
-            <div class="cat__segment"></div>
-            <div class="cat__segment"></div>
-            <div class="cat__segment"></div>
-            <div class="cat__segment"></div>
-            <div class="cat__segment"></div>
-            <div class="cat__segment"></div>
-            <div class="cat__segment"></div>
-            <div class="cat__segment"></div>
-            <div class="cat__segment"></div>
-            <div class="cat__segment"></div>
-            <div class="cat__segment"></div>
-            <div class="cat__segment"></div>
-            <div class="cat__segment"></div>
-            <div class="cat__segment"></div>
-            <div class="cat__segment"></div>
-        </div>
-    </section>
-
-    <section class="slide no-number">
-        <img class="cover" src="pictures/performance-tab.png" alt="Performance tab screenshot">
     </section>
 
     <section class="slide">
@@ -173,7 +145,7 @@
                 margin: 0 auto;
                 border-style: solid;
                 border-width: 0 15px 15px 15px;
-                border-color: transparent transparent #0e193e transparent;
+                border-color: transparent transparent #191919 transparent;
             }
         </style>
     </section>
@@ -204,7 +176,7 @@
 
         <style>
             .styles .pointer-wrapper {
-                margin-left: 23%;
+                margin-left: 22%;
             }
         </style>
     </section>
@@ -215,8 +187,6 @@
         <div class="pointer-wrapper">
             <div class="pointer"></div>
         </div>
-
-        <img class="key" src="pictures/key.svg" alt="Key icon">
 
         <div class="columns two">
             <div>
@@ -238,9 +208,11 @@
             </div>
         </div>
 
+        <img class="key next" src="pictures/key.svg" alt="Key icon">
+
         <style>
             .layout .pointer-wrapper {
-                margin-left: 43%;
+                margin-left: 41%;
             }
         </style>
     </section>
@@ -273,7 +245,7 @@
 
         <style>
             .paint .pointer-wrapper {
-                margin-left: 62%;
+                margin-left: 59%;
             }
         </style>
     </section>
@@ -300,7 +272,7 @@
 
         <style>
             .composite .pointer-wrapper {
-                margin-left: 83%;
+                margin-left: 79%;
             }
         </style>
     </section>
@@ -597,6 +569,7 @@
             <li><a href="https://developers.google.com/web/fundamentals/performance/rendering/">https://developers.google.com/web/fundamentals/performance/rendering/</a></li>
             <li><a href="https://www.udacity.com/course/browser-rendering-optimization--ud860">https://www.udacity.com/course/browser-rendering-optimization--ud860</a></li>
             <li><a href="https://developers.google.com/web/fundamentals/performance/rail">https://developers.google.com/web/fundamentals/performance/rail</a></li>
+            <li><a href="https://csstriggers.com/">https://csstriggers.com/</a></li>
         </ul>
         <strong>Non-technical:</strong>
         <ul style="font-size: 20px;">
@@ -613,7 +586,7 @@
 
     <div class="progress"></div>
 
-    <script src="node_modules/shower-core/shower.min.js"></script>
+    <script src="node_modules/@shower/core/dist/shower.js"></script>
     <!-- Copyright © 3000 Yours Truly, Famous Inc. -->
 
 </body>
