@@ -24,7 +24,7 @@
     width: 80px;
     height: 50px;
     content: '';
-    background-image: url('../theme/images/cv_logo.png');
+    background-image: url('/images/cv_logo.png');
     background-size: contain;
     background-repeat: no-repeat;
 }
